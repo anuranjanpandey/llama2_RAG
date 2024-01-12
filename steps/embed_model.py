@@ -3,7 +3,7 @@ from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from zenml import step
 
 @step(enable_cache=True)
-def embed_model(embed_model_name: str) -> HuggingFaceEmbeddings:
+def embed_model(embed_model_name: str):
     """Embedding model"""
 
     device = f'cuda:{cuda.current_device()}' if cuda.is_available() else 'cpu'

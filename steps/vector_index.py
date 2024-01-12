@@ -13,19 +13,17 @@ class VectorIndex:
         environment=os.environ.get('PINECONE_ENVIRONMENT') or 'PINECONE_ENV'
         )
         
-    def initialize_vector_index(self, index_name: str = 'llama-2-rag', embeddings, metric: str = 'cosine'):
+    def initialize_vector_index(self, embedding_len: int, index_name: str = 'llama-2-rag',  metric: str = 'cosine'):
         """Initialize vector index"""
         self.index_name = index_name
 
         if self.index_name not in pinecone.list_indexes():
             pinecone.create_index(
                 self.index_name,
-                dimension=len(embeddings[0]),
+                dimension=embedding_len,
                 metric='cosine'
             )
             # wait for index to finish initialization
             while not pinecone.describe_index(index_name).status['ready']:
                 time.sleep(1) 
 
-    def __call__(self, vector):
-        return self.index.nearest(vector)
