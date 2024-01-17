@@ -8,7 +8,8 @@ import click
     '--embed_model_name', default='sentence-transformers/all-MiniLM-L6-v2', help='Embed model name',
 )
 
-def main(embed_model_name: str):
+# to do update seperate functions for Initializing huggingface embedding pipeline, Building the vector index, Ingesting data into the vector index, Initializing the Huggingface pipeline, and Initializing the Retrival QA chain
+def main():
     """Main function"""
     # get mlflow tracking uri
     mlflow_tracking_uri = get_tracking_uri()
